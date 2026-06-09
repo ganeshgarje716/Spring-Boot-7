@@ -1,5 +1,6 @@
 package com.ganesh.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
 
 import com.ganesh.entity.Book;
 import com.ganesh.repository.BookRepository;
@@ -20,13 +22,9 @@ public class BookController {
 
 	
 	@GetMapping("/")
-	public ModelAndView getBookForm() {
+	public String getBookForm(Model model) {
 		
-		ModelAndView mav=new ModelAndView();
-		
-		mav.setViewName("book-form");
-		
-		return mav;
+		return "book-form";
 	}
 	
 	
@@ -53,5 +51,20 @@ public class BookController {
 		
 		return mav;
 	}
+	
+	
+	@GetMapping("/allbooks")
+	public String getAllBooks(Model model) {
+		
+		List<Book> all = bookRepository.findAll();
+		
+		model.addAttribute("books", all);
+		
+		return "book-form";
+	
+	}
+	
+	
+	
 	
 }

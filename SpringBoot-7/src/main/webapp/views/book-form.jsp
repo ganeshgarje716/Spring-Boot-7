@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +28,8 @@
 
 <div>
 
+ <a href="allbooks">All Books</a>
+
  <form action="search-book">
  
      <label>Book ID</label>
@@ -33,6 +39,27 @@
  
  
  </form>
+ 
+ 
+ <table border="2" width="100%" height= "50%"   >
+ 
+    <tr bgcolor="yellow">
+       <th>ID</th>
+       <th>Name</th>
+       <th>Price</th>
+       <th>Qty</th>    
+    </tr>
+    
+    <c:forEach var="book" items="${books}">
+    <tr align="center" bgcolor="pink">
+        <td>${book.id}</td>
+        <td>${book.name}</td>
+        <td>${book.price}</td>
+        <td>${book.qty}</td>
+    </tr>
+    </c:forEach>
+ 
+ </table>
  
    <h4 style="color: red">${msg}</h4>
  
